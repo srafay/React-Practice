@@ -16,8 +16,8 @@
 
 	<script type="text/babel">
 	
-		var Practice = React.createClass({
-			getInitialState(){
+		var Product = React.createClass({
+			getInitialState: function(){
 				return {qty: 0};
 			},
 			buy: function(){
@@ -29,13 +29,37 @@
 					<p>Android Mobile</p>
 					<button onClick={this.buy}>Buy</button>
 					<h4>Quantity : {this.state.qty} Items</h4>
+					<hr/>
 				</div>
 				);
 				}
 		});
 		
+		var Total = React.createClass({
+			render: function(){
+				return(
+					<div>
+					<h4>Total Cash : </h4>
+					</div>
+				);
+			}
+		});
+		
+		var ProductList = React.createClass({
+			render: function(){
+				return(
+					<div>
+						<Product/>
+						<Product/>
+						<Product/>
+						<Total/>
+					</div>
+				);
+			}
+		});
+		
 		ReactDOM.render(
-        <Practice />,
+        <ProductList />,
         document.getElementById('container')
       );
 
