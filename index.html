@@ -33,8 +33,14 @@
 			},
 			
 			/* Increment the quantity('qty') attribute of current object when buy is clicked */
+			/* Increment the total cost attribute of ProductList Object */
 			buy: function(){
-				this.setState({qty: this.state.qty+1});	
+				this.setState({qty: this.state.qty+1});
+				
+				/* Pass the price of current product to addPrice Function referencer (handlePrice) */
+				this.props.handlePrice(this.props.price);
+				
+				
 			},
 			
 			render : function() {
@@ -51,10 +57,13 @@
 		});
 		
 		var Total = React.createClass({
+		
+			
+			
 			render: function(){
 				return(
 					<div>
-					<h4>Total Cash : </h4>
+					<h4>Total Cash : {this.props.cost}$</h4>
 					</div>
 				);
 			}
@@ -62,17 +71,26 @@
 		
 		var ProductList = React.createClass({
 		
+			getInitialState: function(){
+				return {tcost: 0};
+			},
+			
+			addPrice: function(price){
+				this.setState({tcost: this.state.tcost + price});
+			},
+		
 			showProduct: function(name, quantity){
 				alert("You bought " + name + " (Quantity: " + quantity + ")");
 			}, 
 			
+			
 			render: function(){
 				return(
 					<div>
-						<Product name="Android" price="120" handleShow={this.showProduct}/>
-						<Product name="iPhone" price="150" handleShow={this.showProduct}/>
-						<Product name="Nokia" price="200" handleShow={this.showProduct}/>
-						<Total/>
+						<Product name="Android" price="120" handleShow={this.showProduct} handlePrice={this.addPrice}/>
+						<Product name="iPhone" price="150" handleShow={this.showProduct} handlePrice={this.addPrice}/>
+						<Product name="Nokia" price="200" handleShow={this.showProduct} handlePrice={this.addPrice}/>
+						<Total cost={this.state.tcost}/>
 					</div>
 				);
 			}
