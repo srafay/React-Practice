@@ -76,7 +76,7 @@
 			},
 			
 			addPrice: function(price){
-				this.setState({tcost: parseInt(this.state.tcost,10) + parseInt(price,10)});
+				this.setState({tcost: this.state.tcost + price});
 			},
 		
 			showProduct: function(name, quantity){
@@ -87,9 +87,9 @@
 			render: function(){
 				return(
 					<div>
-						<Product name="Android" price="120" handleShow={this.showProduct} handlePrice={this.addPrice}/>
-						<Product name="iPhone" price="150" handleShow={this.showProduct} handlePrice={this.addPrice}/>
-						<Product name="Nokia" price="200" handleShow={this.showProduct} handlePrice={this.addPrice}/>
+						<Product name="Android" price={120} handleShow={this.showProduct} handlePrice={this.addPrice}/>
+						<Product name="iPhone" price={150} handleShow={this.showProduct} handlePrice={this.addPrice}/>
+						<Product name="Nokia" price={200} handleShow={this.showProduct} handlePrice={this.addPrice}/>
 						<Total cost={this.state.tcost}/>
 					</div>
 				);
