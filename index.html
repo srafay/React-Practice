@@ -9,6 +9,8 @@
   </head>
   
   <body>
+  
+	<!-- This div will be rendered with the code provided by React Object -->
 	<div id="container">
 	<p>Hello World! Default text</p>
 	<a href="#">Click me lol</a>
@@ -17,17 +19,30 @@
 	<script type="text/babel">
 	
 		var Product = React.createClass({
+		
+			show: function(){
+				/* Calling Parent function from the child function */
+				this.props.handleShow(this.props.name, this.state.qty);
+				/* this.props.name comes from the parent object (when initializing in ProductList) */
+				/* this.state.qty comes from this object itself */
+			},
+			
+			/*Initialize objects default quantity to 0 */
 			getInitialState: function(){
 				return {qty: 0};
 			},
+			
+			/* Increment the quantity('qty') attribute of current object when buy is clicked */
 			buy: function(){
 				this.setState({qty: this.state.qty+1});	
 			},
+			
 			render : function() {
 				return(
 				<div>
 					<p>{this.props.name} - {this.props.price}$</p>
 					<button onClick={this.buy}>Buy</button>
+					<button onClick={this.show}>Show</button>
 					<h4>Quantity : {this.state.qty} Items</h4>
 					<hr/>
 				</div>
@@ -46,18 +61,24 @@
 		});
 		
 		var ProductList = React.createClass({
+		
+			showProduct: function(name, quantity){
+				alert("You bought " + name + " (Quantity: " + quantity + ")");
+			}, 
+			
 			render: function(){
 				return(
 					<div>
-						<Product name="Android" price="120"/>
-						<Product name="iPhone" price="150"/>
-						<Product name="Nokia" price="200"/>
+						<Product name="Android" price="120" handleShow={this.showProduct}/>
+						<Product name="iPhone" price="150" handleShow={this.showProduct}/>
+						<Product name="Nokia" price="200" handleShow={this.showProduct}/>
 						<Total/>
 					</div>
 				);
 			}
 		});
 		
+		/* Replace inner HTML of <div> 'container' with ProductList's customized HTML */
 		ReactDOM.render(
         <ProductList />,
         document.getElementById('container')
