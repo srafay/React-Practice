@@ -72,7 +72,14 @@
 		var ProductList = React.createClass({
 		
 			getInitialState: function(){
-				return {tcost: 0};
+				return {
+					tcost: 0,
+					productList: [
+						{name:"Android", price:120},
+						{name:"iPhone", price:150},
+						{name:"Nokia", price:200}
+					]
+				};
 			},
 			
 			addPrice: function(price){
@@ -84,12 +91,17 @@
 			}, 
 			
 			
+			
 			render: function(){
+				var component = this;
+				var products = this.state.productList.map(function(product){
+					return(
+						<Product name={product.name} price={product.price} handleShow={component.showProduct} handlePrice={component.addPrice}/>
+					);
+				});
 				return(
 					<div>
-						<Product name="Android" price={120} handleShow={this.showProduct} handlePrice={this.addPrice}/>
-						<Product name="iPhone" price={150} handleShow={this.showProduct} handlePrice={this.addPrice}/>
-						<Product name="Nokia" price={200} handleShow={this.showProduct} handlePrice={this.addPrice}/>
+						{products}
 						<Total cost={this.state.tcost}/>
 					</div>
 				);
