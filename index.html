@@ -26,7 +26,7 @@
 			render : function() {
 				return(
 				<div>
-					<p>Android Mobile</p>
+					<p>{this.props.name} - {this.props.price}$</p>
 					<button onClick={this.buy}>Buy</button>
 					<h4>Quantity : {this.state.qty} Items</h4>
 					<hr/>
@@ -49,9 +49,9 @@
 			render: function(){
 				return(
 					<div>
-						<Product/>
-						<Product/>
-						<Product/>
+						<Product name="Android" price="120"/>
+						<Product name="iPhone" price="150"/>
+						<Product name="Nokia" price="200"/>
 						<Total/>
 					</div>
 				);
