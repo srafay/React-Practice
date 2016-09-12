@@ -69,6 +69,29 @@
 			}
 		});
 		
+		var ProductForm = React.createClass({
+			submit: function(e){
+				e.preventDefault();
+				alert("Product name: " + this.refs.name.value + " Product Price: " + this.refs.price.value + "$");
+				
+				this.refs.name.value="";
+				this.refs.price.value="";
+			},
+			
+			render: function(){
+				return(
+					<form>
+						<input type="text" placeholder="Enter Product name" ref="name"/> ,
+						<input type="text" placeholder="Enter Product price" ref="price"/>
+						<br/><br/>
+						<button onClick={this.submit}>Add Product</button>
+						<br/><br/>
+						<hr/>
+					</form>
+				);
+			}
+		});
+		
 		var ProductList = React.createClass({
 		
 			getInitialState: function(){
@@ -93,14 +116,19 @@
 			
 			
 			render: function(){
+				/* 'component' will act as a reference to ProductList */
 				var component = this;
+				/* Map (initialize) the 'Product' component's attributes with productList Array */
 				var products = this.state.productList.map(function(product){
 					return(
-						<Product name={product.name} price={product.price} handleShow={component.showProduct} handlePrice={component.addPrice}/>
+						<Product name={product.name} price={product.price}
+						handleShow={component.showProduct} handlePrice={component.addPrice}
+						/>
 					);
 				});
 				return(
 					<div>
+						<ProductForm />
 						{products}
 						<Total cost={this.state.tcost}/>
 					</div>
