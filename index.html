@@ -72,7 +72,11 @@
 		var ProductForm = React.createClass({
 			submit: function(e){
 				e.preventDefault();
-				alert("Product name: " + this.refs.name.value + " Product Price: " + this.refs.price.value + "$");
+				var product = {
+					name: this.refs.name.value,
+					price: parseInt(this.refs.price.value)
+				}
+				this.props.handleCreate(product);
 				
 				this.refs.name.value="";
 				this.refs.price.value="";
@@ -93,6 +97,12 @@
 		});
 		
 		var ProductList = React.createClass({
+		
+			addProduct: function(product){
+				this.setState({
+					productList: this.state.productList.concat(product)
+				});
+			},
 		
 			getInitialState: function(){
 				return {
@@ -128,7 +138,7 @@
 				});
 				return(
 					<div>
-						<ProductForm />
+						<ProductForm handleCreate={this.addProduct}/>
 						{products}
 						<Total cost={this.state.tcost}/>
 					</div>
