@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>React JS practice</title>
+	<script src="build/react.js"></script>
+    <script src="build/react-dom.js"></script>
+    <script src="https://unpkg.com/babel-core@5.8.38/browser.min.js"></script>
+	<link href="style.css" rel="stylesheet"/>
+  </head>
+  
+  <body>
+  
+	<!-- This div will be rendered with the code provided by React Object -->
+	<div id="container">
+	<p>Hello World! Default text</p>
+	<a href="#">Click me lol</a>
+	</div>
+
+	<script type="text/babel">
+	
+		var Product = React.createClass({
+		
+			
+			render : function() {
+				return(
+					<nav>
+        <ul>
+            <li><a href="home.html">Home</a></li>
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="news.html">News</a></li>
+        </ul>
+    </nav>
+				);
+				}
+		});
+		
+		/* Replace inner HTML of <div> 'container' with ProductList's customized HTML */
+		ReactDOM.render(
+        <Product />,
+        document.getElementById('container')
+      );
+
+	</script>
+  </body>
+</html>
